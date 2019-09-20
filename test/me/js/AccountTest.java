@@ -3,6 +3,7 @@ package me.js;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import org.junit.Before;
 import org.junit.Test;
 
 /*
@@ -24,7 +25,12 @@ import org.junit.Test;
  */
 public class AccountTest {
 
-	private final Account account = new Account(10000);
+	private Account account;
+
+	@Before
+	public void setUp() {
+		account = new Account(10000);
+	}
 
 	@Test
 	public void 계좌생성() {
@@ -38,15 +44,16 @@ public class AccountTest {
 	 */
 	@Test
 	public void 잔고조회() {
-		Account account = new Account(10000);
+		setUp();
 		if(account.getBalance() != 10000) {
 			assertEquals(10000, account.getBalance());
 		}
-		account = new Account(50);
+		setUp();
 		if(account.getBalance() != 50) {
 			assertEquals(10000, account.getBalance());
 		}
 	}
+
 
 	/*  입금
 		- 10000원으로 계좌 생성
@@ -55,7 +62,7 @@ public class AccountTest {
 	 */
 	@Test
 	public void 입금() {
-		Account account = new Account(10000);
+		setUp();
 		account.deposit(1000);
 		assertEquals("10000원에서 1000원 입금하면 11000원", 11000, account.getBalance());
 	}
@@ -67,11 +74,13 @@ public class AccountTest {
 	 */
 	@Test
 	public void 출금() {
-		Account account = new Account(10000);
+		setUp();
 		account.withdraw(1000);
 		assertEquals("10000원에서 1000원 출금 -> 9000원", 9000, account.getBalance());
 	}
 }
+
+
 
 
 
